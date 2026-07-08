@@ -37,16 +37,6 @@ const mainNavItems: NavItem[] = [
         href: "/achievements",
         icon: Trophy,
     },
-    {
-        title: "Profile",
-        href: "/profile",
-        icon: User,
-    },
-    {
-        title: "Settings",
-        href: "/settings",
-        icon: Settings,
-    },
 ];
 
 const footerNavItems: NavItem[] = [

@@ -1,5 +1,6 @@
 import { Head } from "@inertiajs/react";
 import { dashboard } from "@/routes";
+import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 import {
     Search,
     Bell,
@@ -129,6 +130,11 @@ export default function Dashboard() {
         "⚔️ Elden Ring DLC Coming Soon",
     ];
 
+
+    const data = [
+        { name: "Completed", value: 71 },
+        { name: "Remaining", value: 29 },
+    ];
 
     return (
         <>
@@ -330,36 +336,76 @@ export default function Dashboard() {
 
                         {/* Recently */}
 
-                        <div className="mt-8 rounded-2xl bg-[#17171d] p-6">
+                        {/* Recently Played */}
 
-                            <h2 className="mb-5 text-2xl font-bold">
-                                🕹 Recently Played
-                            </h2>
+                        <div className="mt-8 rounded-2xl border border-white/10 bg-[#17171d] p-6">
+
+                            <div className="mb-5 flex items-center justify-between">
+
+                                <h2 className="text-2xl font-bold">
+                                    🕹 Recently Played
+                                </h2>
+
+                                <button className="text-sm text-red-500 hover:text-red-400">
+                                    View All
+                                </button>
+
+                            </div>
 
                             <div className="space-y-4">
 
-                                {recentlyPlayed.map((game) => (
+                                {[
+                                    {
+                                        title: "Devil May Cry 3",
+                                        image: "/images/dmc3.jpg",
+                                        played: "2 Hours Ago",
+                                        hours: "186 Hours",
+                                    },
+                                    {
+                                        title: "Resident Evil 4",
+                                        image: "/images/re4.jpg",
+                                        played: "Yesterday",
+                                        hours: "120 Hours",
+                                    },
+                                    {
+                                        title: "Cyberpunk 2077",
+                                        image: "/images/cyberpunk.jpg",
+                                        played: "3 Days Ago",
+                                        hours: "95 Hours",
+                                    },
+                                ].map((game) => (
 
                                     <div
                                         key={game.title}
-                                        className="flex justify-between rounded-xl bg-[#202028] p-4"
+                                        className="flex items-center gap-4 rounded-xl bg-[#202028] p-3 transition hover:bg-[#2b2b35]"
                                     >
 
-                                        <div>
+                                        <img
+                                            src={game.image}
+                                            className="h-16 w-12 rounded-lg object-cover"
+                                        />
+
+                                        <div className="flex-1">
 
                                             <h3 className="font-semibold">
                                                 {game.title}
                                             </h3>
 
-                                            <p className="text-gray-400 text-sm">
-                                                {game.time}
+                                            <p className="text-xs text-gray-400">
+                                                Last Played • {game.played}
+                                            </p>
+
+                                            <p className="mt-1 text-xs text-red-500">
+                                                {game.hours}
                                             </p>
 
                                         </div>
 
-                                        <span className="text-red-500">
-                                            {game.percent}
-                                        </span>
+                                        <button className="rounded-lg bg-red-600 px-4 py-2 text-sm font-semibold transition hover:bg-red-700">
+
+                                            Resume
+
+                                        </button>
 
                                     </div>
 
@@ -370,6 +416,8 @@ export default function Dashboard() {
                         </div>
 
                     </div>
+
+
 
                     {/* RIGHT */}
 
@@ -499,118 +547,124 @@ export default function Dashboard() {
 
                         </div>
 
-                        {/* Statistics */}
 
                         {/* Statistics */}
 
                         <div className="rounded-2xl border border-white/10 bg-[#17171d] p-6">
-
                             <div className="mb-5 flex items-center justify-between">
-
-                                <h2 className="text-xl font-bold">
-                                    📊 Statistics
-                                </h2>
-
-                                <span className="text-xs text-gray-500">
-                                    2026
-                                </span>
-
+                                <h2 className="text-xl font-bold">📊 Statistics</h2>
+                                <span className="text-xs text-gray-500">2026</span>
                             </div>
 
-                            <div className="space-y-5">
+                            <div className="flex justify-center">
+                                <div className="relative h-52 w-52">
+                                    <ResponsiveContainer width="100%" height="100%">
+                                        <PieChart>
+                                            <Pie
+                                                data={data}
+                                                dataKey="value"
+                                                innerRadius={60}
+                                                outerRadius={80}
+                                                startAngle={90}
+                                                endAngle={-270}
+                                            >
+                                                <Cell fill="#22c55e" />
+                                                <Cell fill="#2b2b34" />
+                                            </Pie>
+                                        </PieChart>
+                                    </ResponsiveContainer>
 
-                                <div>
-
-                                    <div className="mb-2 flex justify-between text-sm">
-
-                                        <span>Total Games</span>
-
-                                        <span className="text-red-500">248</span>
-
+                                    <div className="absolute inset-0 flex flex-col items-center justify-center">
+                                        <span className="text-3xl font-bold">71%</span>
+                                        <span className="text-sm text-gray-500">Completed</span>
                                     </div>
-
-                                    <div className="h-2 rounded-full bg-[#2b2b34]">
-
-                                        <div className="h-full w-[90%] rounded-full bg-red-600" />
-
-                                    </div>
-
                                 </div>
-
-                                <div>
-
-                                    <div className="mb-2 flex justify-between text-sm">
-
-                                        <span>Completed</span>
-
-                                        <span className="text-green-400">71%</span>
-
-                                    </div>
-
-                                    <div className="h-2 rounded-full bg-[#2b2b34]">
-
-                                        <div className="h-full w-[71%] rounded-full bg-green-500" />
-
-                                    </div>
-
-                                </div>
-
-                                <div>
-
-                                    <div className="mb-2 flex justify-between text-sm">
-
-                                        <span>Favorites</span>
-
-                                        <span className="text-yellow-400">38</span>
-
-                                    </div>
-
-                                    <div className="h-2 rounded-full bg-[#2b2b34]">
-
-                                        <div className="h-full w-[35%] rounded-full bg-yellow-400" />
-
-                                    </div>
-
-                                </div>
-
-                                <div>
-
-                                    <div className="mb-2 flex justify-between text-sm">
-
-                                        <span>Wishlist</span>
-
-                                        <span className="text-blue-400">24</span>
-
-                                    </div>
-
-                                    <div className="h-2 rounded-full bg-[#2b2b34]">
-
-                                        <div className="h-full w-[25%] rounded-full bg-blue-500" />
-
-                                    </div>
-
-                                </div>
-
                             </div>
 
+                            <div className="mt-5 space-y-2 text-sm">
+                                <div className="flex justify-between">
+                                    <span>Total Games</span>
+                                    <span className="text-red-500">248</span>
+                                </div>
+
+                                <div className="flex justify-between">
+                                    <span>Favorites</span>
+                                    <span className="text-yellow-400">38</span>
+                                </div>
+
+                                <div className="flex justify-between">
+                                    <span>Wishlist</span>
+                                    <span className="text-blue-400">24</span>
+                                </div>
+                            </div>
                         </div>
                         {/* News */}
 
                         <div className="rounded-2xl bg-[#17171d] p-6">
 
-                            <h2 className="mb-5 text-xl font-bold">
-                                📰 Latest
-                            </h2>
+                            <div className="mb-5 flex items-center justify-between">
 
-                            <div className="space-y-3">
+                                <h2 className="text-xl font-bold">
+                                    🎯 Continue Playing
+                                </h2>
 
-                                {latestNews.map((news) => (
+                                <button className="text-sm text-red-500 hover:text-red-400">
+                                    View All
+                                </button>
+
+                            </div>
+
+                            <div className="space-y-4">
+
+                                {[
+                                    {
+                                        title: "Devil May Cry 3",
+                                        image: "/images/dmc3.jpg",
+                                        progress: "92%",
+                                    },
+                                    {
+                                        title: "Resident Evil 4",
+                                        image: "/images/re4.jpg",
+                                        progress: "84%",
+                                    },
+                                    {
+                                        title: "Cyberpunk 2077",
+                                        image: "/images/cyberpunk.jpg",
+                                        progress: "76%",
+                                    },
+                                ].map((game) => (
 
                                     <div
-                                        key={news}
-                                        className="rounded-xl bg-[#202028] p-3 text-sm"
+                                        key={game.title}
+                                        className="flex items-center gap-3 rounded-xl bg-[#202028] p-3 transition hover:bg-[#2b2b35]"
                                     >
-                                        {news}
+
+                                        <img
+                                            src={game.image}
+                                            className="h-14 w-14 rounded-lg object-cover"
+                                        />
+
+                                        <div className="flex-1">
+
+                                            <h3 className="font-semibold">
+                                                {game.title}
+                                            </h3>
+
+                                            <p className="text-xs text-gray-400">
+                                                Progress {game.progress}
+                                            </p>
+
+                                            <div className="mt-2 h-2 rounded-full bg-[#34343d]">
+
+                                                <div
+                                                    className="h-full rounded-full bg-red-600"
+                                                    style={{ width: game.progress }}
+                                                />
+
+                                            </div>
+
+                                        </div>
+
                                     </div>
 
                                 ))}
