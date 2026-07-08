@@ -1,5 +1,5 @@
 import { Link } from '@inertiajs/react';
-import { BookOpen, FolderGit2, LayoutGrid } from 'lucide-react';
+import { BookOpen, FolderGit2, Heart, LayoutGrid, Library, Settings, Trophy, User, } from 'lucide-react';
 import AppLogo from '@/components/app-logo';
 import { NavFooter } from '@/components/nav-footer';
 import { NavMain } from '@/components/nav-main';
@@ -18,22 +18,42 @@ import type { NavItem } from '@/types';
 
 const mainNavItems: NavItem[] = [
     {
-        title: 'Dashboard',
+        title: "Dashboard",
         href: dashboard(),
         icon: LayoutGrid,
+    },
+    {
+        title: "Library",
+        href: "/library",
+        icon: Library,
+    },
+    {
+        title: "Wishlist",
+        href: "/wishlist",
+        icon: Heart,
+    },
+    {
+        title: "Achievements",
+        href: "/achievements",
+        icon: Trophy,
+    },
+    {
+        title: "Profile",
+        href: "/profile",
+        icon: User,
+    },
+    {
+        title: "Settings",
+        href: "/settings",
+        icon: Settings,
     },
 ];
 
 const footerNavItems: NavItem[] = [
-    {
-        title: 'Repository',
-        href: 'https://github.com/laravel/react-starter-kit',
+   {
+        title: "GitHub",
+        href: "https://github.com/IannxGusion",
         icon: FolderGit2,
-    },
-    {
-        title: 'Documentation',
-        href: 'https://laravel.com/docs/starter-kits#react',
-        icon: BookOpen,
     },
 ];
 
